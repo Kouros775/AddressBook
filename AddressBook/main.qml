@@ -96,6 +96,7 @@ Window {
                 onClicked: {
                     myList.currentIndex = index;
                     parent.color = "transparent";
+                    addressModel.selectRow(index);
                 }
             }
         }
@@ -162,6 +163,8 @@ Window {
 
     ColumnLayout{
         anchors.fill: parent;
+
+
         Row{
             Layout.fillWidth: true;
             Layout.margins: 6;
@@ -185,6 +188,9 @@ Window {
             }
         }
 
+        Label{
+            text: addressModel.displayMsg;
+        }
         ListView{
             id: myList;
             Layout.fillWidth: true;
@@ -194,6 +200,9 @@ Window {
             model: addressDataModel;
             header: listViewHeader;
             delegate: listViewDelegate;
+            ScrollBar.vertical: ScrollBar{
+                policy: ScrollBar.AsNeeded; // or AlwaysOn
+            }
         }
     }
 }

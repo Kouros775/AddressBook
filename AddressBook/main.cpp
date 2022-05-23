@@ -1,5 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "addressbookviewmodel.h"
 
 
 int main(int argc, char *argv[])
@@ -7,6 +10,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    AddressBookViewModel addressModel;
+    engine.rootContext()->setContextProperty("addressModel", &addressModel);
+
     const QUrl url(u"qrc:/AddressBook/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
