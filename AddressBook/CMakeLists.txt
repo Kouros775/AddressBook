@@ -19,6 +19,8 @@ qt_add_qml_module(appAddressBook
     URI AddressBook
     VERSION 1.0
     QML_FILES main.qml 
+    QML_FILES AddressBookView.qml
+    QML_FILES AboutMeView.qml
 )
 
 set_target_properties(appAddressBook PROPERTIES
