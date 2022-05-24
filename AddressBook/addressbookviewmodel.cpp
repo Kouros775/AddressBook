@@ -10,13 +10,14 @@ AddressBookViewModel::AddressBookViewModel(QObject *parent)
 
 void AddressBookViewModel::selectRow(int iPos)
 {
+    qDebug() << __FUNCTION__;
     m_selectedPos = iPos;
     emit displayMsgChanged();
 }
 
 QString AddressBookViewModel::getDisplayMsg()
 {
-    QString retStr = &"Selected Index : " [  m_selectedPos];
-    qDebug() << m_selectedPos;
+    qDebug() << __FUNCTION__ <<" : " << m_selectedPos;
+    QString retStr = "Selected Index : " + QString::number(m_selectedPos);
     return retStr;
 }

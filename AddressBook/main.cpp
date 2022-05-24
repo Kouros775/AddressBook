@@ -11,8 +11,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    AddressBookViewModel addressModel;
-    engine.rootContext()->setContextProperty("addressModel", &addressModel);
+    //AddressBookViewModel addressModel;
+    //engine.rootContext()->setContextProperty("addressModel", &addressModel);
+
+    qmlRegisterType<AddressBookViewModel>("ViewModel", 1, 0, "AddressBookViewModel");
 
     const QUrl url(u"qrc:/AddressBook/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

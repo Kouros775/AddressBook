@@ -10,6 +10,9 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 qt_add_executable(appAddressBook
     main.cpp
     addressbookviewmodel.cpp
+    addressbookviewmodel.h
+    addressbooklistmodel.cpp
+    addressbooklistmodel.h
 )
 
 qt_add_qml_module(appAddressBook

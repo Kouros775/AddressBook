@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import ViewModel 1.0
 
 
 Window {
@@ -11,6 +12,10 @@ Window {
     title: qsTr("Hello World")
 
     property int listWidth: root.width;
+
+    AddressBookViewModel{
+        id: myModel;
+    }
 
     ListModel{
         id: addressDataModel;
@@ -79,7 +84,7 @@ Window {
                 onEntered: {
                     parent.color = "lightblue";
 
-                    if(myList.currentIndex == index)
+                    if(myList.currentIndex === index)
                         parent.color= "transparent";
                     else
                         parent.color = "lightblue";
@@ -88,7 +93,7 @@ Window {
                 onExited: {
                     parent.color = "lightGray";
 
-                    if(myList.currentIndex == index)
+                    if(myList.currentIndex === index)
                         parent.color = "transparent";
                     else
                         parent.color = "lightGray";
@@ -96,7 +101,7 @@ Window {
                 onClicked: {
                     myList.currentIndex = index;
                     parent.color = "transparent";
-                    addressModel.selectRow(index);
+                    myModel.selectRow(index);
                 }
             }
         }
@@ -189,8 +194,10 @@ Window {
         }
 
         Label{
-            text: addressModel.displayMsg;
+            Layout.fillWidth: true;
+            text: myModel.displayMsg;
         }
+
         ListView{
             id: myList;
             Layout.fillWidth: true;
