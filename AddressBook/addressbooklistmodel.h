@@ -31,7 +31,9 @@ public:
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 
-    Q_INVOKABLE void addData();
+    void addItem();
+    void deleteItem(const int& paramIndex);
+    QVariantMap getItem(const int &paramIndex) const;
 
 protected:
     virtual QHash<int, QByteArray> roleNames() const override;

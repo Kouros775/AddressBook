@@ -60,7 +60,7 @@ int AddressBookListModel::rowCount(const QModelIndex &parent) const
 }
 
 
-void AddressBookListModel::addData()
+void AddressBookListModel::addItem()
 {
     beginInsertRows(QModelIndex(),addressBookList.size(),addressBookList.size());
 
@@ -73,6 +73,19 @@ void AddressBookListModel::addData()
     addressBookList.append(item);
 
     endInsertRows();
+}
+
+
+void AddressBookListModel::deleteItem(const int& paramIndex)
+{
+    if(paramIndex >= 0 && paramIndex < addressBookList.count())
+    {
+        beginRemoveRows(QModelIndex(),paramIndex,paramIndex);
+
+        addressBookList.removeAt(paramIndex);
+
+        endRemoveRows();
+    }
 }
 
 
@@ -107,4 +120,22 @@ QHash<int, QByteArray> AddressBookListModel::roleNames() const
     roleNames[(int)ColumnNames::PhoneRole] = "Phone";
 
     return roleNames;
+}
+
+
+QVariantMap AddressBookListModel::getItem(const int& paramIndex) const
+{
+    QHash<int,QByteArray> names = roleNames();
+    QHashIterator<int, QByteArray> i(names);
+    QVariantMap res;
+
+    while (i.hasNext())
+    {
+        i.next();
+        QModelIndex idx = index(paramIndex, 0);
+        QVariant data = idx.data(i.key());
+        res[i.value()] = data;
+    }
+
+    return res;
 }

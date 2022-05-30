@@ -21,7 +21,9 @@ public:
     void setSelectedIndex(const int& param);
     int getSelectedIndex() const { return this->selectedIndex; }
 
-    Q_INVOKABLE bool addAddressBookItem();
+    Q_INVOKABLE void addAddressBookItem();
+    Q_INVOKABLE void removeAddressBookItem(const int& paramIndex);
+    Q_INVOKABLE QVariantMap getAddressBookItem(const int& paramIndex) const;
 
 signals:
     void signalChangedSelectedIndex();

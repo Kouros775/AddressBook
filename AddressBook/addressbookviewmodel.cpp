@@ -6,7 +6,7 @@ AddressBookViewModel::AddressBookViewModel(QObject *parent)
     : QObject{parent}
     , selectedIndex{-1}
 {
-    addressBookListModel.addData();
+    addressBookListModel.addItem();
 }
 
 AddressBookViewModel::~AddressBookViewModel()
@@ -19,7 +19,20 @@ void AddressBookViewModel::setSelectedIndex(const int &param)
     emit signalChangedSelectedIndex();
 }
 
-bool AddressBookViewModel::addAddressBookItem()
+
+void AddressBookViewModel::addAddressBookItem()
 {
-    addressBookListModel.addData();
+    addressBookListModel.addItem();
+}
+
+
+void AddressBookViewModel::removeAddressBookItem(const int &paramIndex)
+{
+    addressBookListModel.deleteItem(paramIndex);
+}
+
+
+QVariantMap AddressBookViewModel::getAddressBookItem(const int &paramIndex) const
+{
+    return addressBookListModel.getItem(paramIndex);
 }

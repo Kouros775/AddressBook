@@ -76,7 +76,7 @@ Item {
                 onClicked: {
                     myList.currentIndex = index;
                     parent.color = "blue";
-                    viewModel.selectedIndex = index;
+                    viewModel.SelectedIndex = index;
                 }
 
             }
@@ -165,7 +165,8 @@ Item {
                 text: qsTr("Remove");
                 highlighted: false;
                 onClicked: {
-                    console.log("Remove");
+                    viewModel.removeAddressBookItem(viewModel.SelectedIndex);
+                    viewModel.SelectedIndex = -1;
                 }
             }
             Button{
@@ -173,7 +174,8 @@ Item {
                 width: (parent.width -24) / 3.0;
                 text: qsTr("Edit");
                 onClicked: {
-                    console.log("Edit");
+                    var selItem = viewModel.getAddressBookItem(viewModel.SelectedIndex);
+                    editItem(selItem.Name, selItem.Age, selItem.Phone);
                 }
             }
         }
@@ -197,5 +199,11 @@ Item {
                 policy: ScrollBar.AsNeeded; // or AlwaysOn
             }
         }
+    }
+    function editItem(name, age, phone)
+    {
+        console.log("name : " + name);
+        console.log("age : " + age);
+        console.log("phone : " + phone);
     }
 }
