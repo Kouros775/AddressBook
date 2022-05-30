@@ -6,42 +6,35 @@
 
 struct ADDRESS_BOOK_ITEM
 {
-    ADDRESS_BOOK_ITEM(const QString& name, const int& age, const QString& phone)
-        : Name(name)
-        , Age(age)
-        , PhoneNumber(phone)
-    {
-    }
-
     QString Name;
     int Age;
-    QString PhoneNumber;
+    QString Phone;
 };
 
 
 class AddressBookListModel : public QAbstractListModel
 {
-    //enum ColumnNames
-    //{
-    //    name = Qt::UserRole,
-    //    age,
-    //    phoneNumber
-    //};
-
-
     Q_OBJECT
 public:
-    explicit AddressBookListModel(QObject *parent = nullptr);
+    explicit AddressBookListModel(QAbstractListModel *parent = nullptr);
+    virtual ~AddressBookListModel();
 
-    //virtual int rowCount(const QModelIndex & = QModelIndex()) const override;
-    //virtual QVariant data(const QModelIndex& index, int nRole) const override;
+    enum class ColumnNames{
+        NameRole = Qt::UserRole,
+        AgeRole,
+        PhoneRole
+    };
+    Q_ENUM(ColumnNames)
+
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+    virtual QVariant data(const QModelIndex& index, int nRole) const override;
+    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 protected:
-    //virtual QHash<int, QByteArray> roleNames() const override;
-    //QHash<int, QByteArray> m_columnNames;
+    virtual QHash<int, QByteArray> roleNames() const override;
 
-protected:
-    QList<ADDRESS_BOOK_ITEM>* m_pAddressBookList;
+private:
+    QList<ADDRESS_BOOK_ITEM> m_pAddressBookList;
 };
 
 #endif // ADDRESSBOOKLISTMODEL_H

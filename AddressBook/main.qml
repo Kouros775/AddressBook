@@ -22,7 +22,7 @@ ApplicationWindow{
             MenuItem{
                 text: qsTr("About Me");
                 onTriggered: {
-                    subLoader.source = "AboutMeView.qml";
+                    mainLoader.source = "AboutMeView.qml";
                 }
             }
         }
@@ -32,10 +32,5 @@ ApplicationWindow{
         id: mainLoader;
         anchors.fill: parent;
         source: "AddressBookView.qml";
-    }
-
-    Loader{
-        id: subLoader;
-        anchors.fill: parent;
     }
 }

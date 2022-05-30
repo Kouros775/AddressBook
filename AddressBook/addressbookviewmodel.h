@@ -2,25 +2,30 @@
 #define ADDRESSBOOKVIEWMODEL_H
 
 #include <QObject>
+#include "addressbooklistmodel.h"
+
 
 class AddressBookViewModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString displayMsg
-               READ getDisplayMsg
-               NOTIFY displayMsgChanged)
+    Q_PROPERTY(int SelectedIndex
+               READ getSelectedIndex
+               WRITE setSelectedIndex
+               NOTIFY signalChangedSelectedIndex)
 public:
     explicit AddressBookViewModel(QObject *parent = nullptr);
-    Q_INVOKABLE void selectRow(int iPos);
+    virtual ~AddressBookViewModel();
 
-    QString getDisplayMsg();
+    Q_INVOKABLE AddressBookListModel* getListModel() { return & addressBookListModel;}
 
+    void setSelectedIndex(const int& param);
+    int getSelectedIndex() const { return this->selectedIndex; }
 signals:
-    void displayMsgChanged();
+    void signalChangedSelectedIndex();
 
-
-protected:
-    int m_selectedPos = -1;
+private:
+    int selectedIndex;
+    AddressBookListModel addressBookListModel;
 };
 
 #endif // ADDRESSBOOKVIEWMODEL_H

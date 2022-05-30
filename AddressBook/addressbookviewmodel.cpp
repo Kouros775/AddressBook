@@ -4,20 +4,16 @@
 
 AddressBookViewModel::AddressBookViewModel(QObject *parent)
     : QObject{parent}
+    , selectedIndex{-1}
 {
-
 }
 
-void AddressBookViewModel::selectRow(int iPos)
+AddressBookViewModel::~AddressBookViewModel()
 {
-    qDebug() << __FUNCTION__;
-    m_selectedPos = iPos;
-    emit displayMsgChanged();
 }
 
-QString AddressBookViewModel::getDisplayMsg()
+void AddressBookViewModel::setSelectedIndex(const int &param)
 {
-    qDebug() << __FUNCTION__ <<" : " << m_selectedPos;
-    QString retStr = "Selected Index : " + QString::number(m_selectedPos);
-    return retStr;
+    selectedIndex = param;
+    emit signalChangedSelectedIndex();
 }
