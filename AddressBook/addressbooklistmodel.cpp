@@ -22,8 +22,7 @@ bool AddressBookListModel::setData(const QModelIndex &index, const QVariant &val
     }
     else
     {
-        //ADDRESS_BOOK_ITEM &item = m_pAddressBookList[index.row()];
-       ADDRESS_BOOK_ITEM item;
+        ADDRESS_BOOK_ITEM &item = addressBookList[index.row()];
 
         if (role == (int)ColumnNames::NameRole)
         {
@@ -57,8 +56,25 @@ int AddressBookListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
 
-    return m_pAddressBookList.size();
+    return addressBookList.size();
 }
+
+
+void AddressBookListModel::addData()
+{
+    beginInsertRows(QModelIndex(),addressBookList.size(),addressBookList.size());
+
+    ADDRESS_BOOK_ITEM item;
+
+    item.Age = 0;
+    item.Name = "Name";
+    item.Phone = "000-0000-0000";
+
+    addressBookList.append(item);
+
+    endInsertRows();
+}
+
 
 QVariant AddressBookListModel::data(const QModelIndex &index, int nRole) const
 {
@@ -66,7 +82,7 @@ QVariant AddressBookListModel::data(const QModelIndex &index, int nRole) const
     if(nRow < 0)
         return QVariant();
 
-    ADDRESS_BOOK_ITEM item = m_pAddressBookList.at(index.row());
+    const ADDRESS_BOOK_ITEM item = addressBookList.at(index.row());
 
     switch((ColumnNames)nRole)
     {

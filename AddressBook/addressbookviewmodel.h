@@ -20,6 +20,9 @@ public:
 
     void setSelectedIndex(const int& param);
     int getSelectedIndex() const { return this->selectedIndex; }
+
+    Q_INVOKABLE bool addAddressBookItem();
+
 signals:
     void signalChangedSelectedIndex();
 

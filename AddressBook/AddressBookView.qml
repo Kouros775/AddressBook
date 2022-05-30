@@ -156,7 +156,7 @@ Item {
                 text: qsTr("Add");
                 highlighted: false;
                 onClicked: {
-                    console.log("Add");
+                    viewModel.addAddressBookItem();
                 }
             }
             Button{

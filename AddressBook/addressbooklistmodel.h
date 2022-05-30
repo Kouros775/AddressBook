@@ -30,11 +30,14 @@ public:
     virtual QVariant data(const QModelIndex& index, int nRole) const override;
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
+
+    Q_INVOKABLE void addData();
+
 protected:
     virtual QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QList<ADDRESS_BOOK_ITEM> m_pAddressBookList;
+    QList<ADDRESS_BOOK_ITEM> addressBookList;
 };
 
 #endif // ADDRESSBOOKLISTMODEL_H
