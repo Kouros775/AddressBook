@@ -15,6 +15,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("viewModel", &viewModel);
 
 
+    int num = 1;
+    num++;
+
+
     const QUrl url(u"qrc:/AddressBook/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
